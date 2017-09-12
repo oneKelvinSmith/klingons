@@ -51,7 +51,7 @@ defmodule KlingonsWeb.Endpoint do
       {:ok,
        config
        |> Keyword.put(:http, [:inet6, port: get_env("PORT")])
-       |> Keyword.put(:url, [host: config[:url][:host], port: get_env("PORT")])
+       |> Keyword.put(:url, [host: get_env("HOST"), port: get_env("PORT")])
        |> Keyword.put(:secret_key_base, get_env("SECRET_KEY_BASE"))}
     else
       {:ok, config}
