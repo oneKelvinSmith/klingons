@@ -48,13 +48,18 @@ defmodule KlingonsWeb.Endpoint do
   """
   def init(_key, config) do
     if config[:load_from_system_env] do
-      port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
-      config
-      |> Keyword.put(:http, [:inet6, port: port])
-      |> Keyword.put(:url, [host: config[:url][:host], port: port])
-      {:ok, config}
+      {:ok,
+       config
+       |> Keyword.put(:http, [:inet6, port: get_env("PORT")])
+       |> Keyword.put(:url, [host: config[:url][:host], port: get_env("PORT")])
+       |> Keyword.put(:secret_key_base, get_env("SECRET_KEY_BASE"))}
     else
       {:ok, config}
     end
+  end
+
+  defp get_env(variable) do
+    System.get_env(variable)
+    || raise "expected the #{variable} environment variable to be set"
   end
 end

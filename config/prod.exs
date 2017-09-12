@@ -21,6 +21,10 @@ config :klingons, KlingonsWeb.Endpoint,
   root: ".",
   version: Application.spec(:klingons, :vsn)
 
+config :klingons, Klingons.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  pool_size: 15
+
 # Do not print debug messages in production
 config :logger, level: :info
 
@@ -64,4 +68,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
