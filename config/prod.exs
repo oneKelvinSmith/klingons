@@ -21,6 +21,7 @@ config :klingons, KlingonsWeb.Endpoint,
   version: Application.spec(:klingons, :vsn)
 
 config :klingons, Klingons.Repo,
+  load_from_system_env: true,
   adapter: Ecto.Adapters.Postgres,
   pool_size: 15
 
