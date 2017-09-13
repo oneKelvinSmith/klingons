@@ -4,6 +4,7 @@
 /db
 /deps
 /*.ez
+/*.tar.gz
 
 erl_crash.dump
 
