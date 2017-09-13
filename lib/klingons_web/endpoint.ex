@@ -39,27 +39,4 @@ defmodule KlingonsWeb.Endpoint do
     signing_salt: "GJ4WNYAc"
 
   plug KlingonsWeb.Router
-
-  @doc """
-  Callback invoked for dynamically configuring the endpoint.
-
-  It receives the endpoint configuration and checks if
-  configuration should be loaded from the system environment.
-  """
-  def init(_key, config) do
-    if config[:load_from_system_env] do
-      {:ok,
-       config
-       |> Keyword.put(:http, [:inet6, port: get_env("PORT")])
-       |> Keyword.put(:url, [host: get_env("HOST"), port: get_env("PORT")])
-       |> Keyword.put(:secret_key_base, get_env("SECRET_KEY_BASE"))}
-    else
-      {:ok, config}
-    end
-  end
-
-  defp get_env(variable) do
-    System.get_env(variable)
-    || raise "expected the #{variable} environment variable to be set"
-  end
 end

@@ -3,7 +3,10 @@ FROM bitwalker/alpine-elixir:1.5.1
 RUN apk add --no-cache bash
 
 EXPOSE 4000
-ENV PORT=4000 MIX_ENV=prod SHELL=/bin/sh
+ENV PORT=4000 \
+    MIX_ENV=prod \
+    REPLACE_OS_VARS=true \
+    SHELL=/bin/sh
 
 ADD klingons.tar.gz ./
 RUN chown -R default ./releases
