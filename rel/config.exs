@@ -30,13 +30,13 @@ environment :dev do
   # dev mode.
   set dev_mode: true
   set include_erts: false
-  set cookie: :"X`!^JRe/hQ^mndi]=!*/IbX9kPoDJC,W!UF([b@iigDiWHsg6TKM8(c~G08[@;$Y"
+  set cookie: :"H<y,mwA~>/(;2cY,!Nsc8o0o:MK|4$@ooSfg<_![1TCMp`0OCWveL[8a`;sh=qVu"
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"Wk@KFbW$0;Vf`2?(!7p6F`D5$$kJJ0s6wDF[>efn~>G:OVBC}m4pWzj]&Y1Wn4<*"
+  set cookie: :"0v0cKNoGg6SX6.>Uonn)rm?K~_z~0HRY)G5@?9|IE3`3&(2vRkC~h[5xW}K_rg`j"
 end
 
 # You may define one or more releases in this file.
@@ -50,3 +50,4 @@ release :klingons do
     :runtime_tools
   ]
 end
+
