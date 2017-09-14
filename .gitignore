@@ -1,4 +1,8 @@
 .env
+.terraform
+*.tfvars
+*.tfstate
+*.tfstate.backup
 
 /_build
 /db
