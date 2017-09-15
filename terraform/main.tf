@@ -1,5 +1,5 @@
 terraform {
-  required_version = "> 0.9.0"
+  required_version = "~> 0.10.4"
 }
 
 provider "aws" {
@@ -20,6 +20,7 @@ resource "aws_ecs_service" "klingons" {
   cluster         = "${aws_ecs_cluster.klingons.id}"
   task_definition = "${aws_ecs_task_definition.klingons.arn}"
   desired_count   = "${var.desired_count}"
+  iam_role        = "${aws_iam_role.klingons_service.arn}"
 
   load_balancer {
     elb_name       = "${aws_elb.klingons.name}"
@@ -45,21 +46,13 @@ resource "aws_elb" "klingons" {
   }
 }
 
-resource "aws_launch_configuration" "klingons" {
-  name          = "${var.name}"
-  image_id      = "${lookup(var.amis, var.region)}"
-  instance_type = "${var.instance_type}"
+resource "aws_iam_role" "klingons_service" {
+  name = "${var.name}_service"
 
-  lifecycle {
-    create_before_destroy = true
-  }
+  assume_role_policy = "${file("policies/ecs_service.json")}"
 }
 
-resource "aws_autoscaling_group" "klingons" {
-  availability_zones   = "${var.availability_zones}"
-  name                 = "${var.name}"
-  max_size             = "${var.max_size}"
-  min_size             = "${var.min_size}"
-  desired_capacity     = "${var.desired_count}"
-  launch_configuration = "${aws_launch_configuration.klingons.name}"
+resource "aws_iam_role_policy_attachment" "klingons_service" {
+  role = "${aws_iam_role.klingons_service.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceRole"
 }
